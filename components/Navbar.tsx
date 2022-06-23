@@ -1,35 +1,39 @@
 import Link from "next/link";
-import React,{FC} from "react";
+import React,{FC, useState,useRef, useEffect} from "react";
 import{useRouter} from 'next/router'
 
-
+import {BsCart3} from 'react-icons/bs'
 
 
 const Navbar:FC = () => {
+
+  const[item,setItem] = useState<number>(0)
+
   const router =useRouter()
-  
-  console.log(router.asPath)
 
- const navLink:string[] = ['/','store','about']
+  const navLink:string[] = ['/','store','about']
 
- const navString:string[] = ['/','/store','/about']
+  const navString:string[] = ['/','/store','/about']
+
+
+ 
 
   return(
       <section
         className="
+        h-16 lg:h-20
+        border-b-2 border-zinc-600
         overflow-hidden
-        shadow-xl
-        px-4
         bg-zinc-100
-        rounded-xl
         items-center justify-between
-        flex min-w-full 
+        flex min-w-full
         "
         >
       <nav
        className=" 
+          h-full
           rounded-xl
-          flex items-center justify-center gap-2 "
+          flex items-center justify-center"
         >
         {navLink.map((item,index)=>(
               
@@ -39,18 +43,40 @@ const Navbar:FC = () => {
             <a 
             className={`
             ${router.pathname === navString[index]? 
-            'font-bold bg-zinc-300 rounded-xl text-zinc-500 py-2 focus:no-underline'
+            'bg-zinc-400 text-zinc-900 focus:no-underline hover:no-underline'
             :'no-underline'}
-            py-7 px-4
-            lg:text-lg 
-            hover:text-black focus:underline 
-            outline-none underline-offset-8 decoration-fuchsia-800
+             px-4 h-full
+            lg:text-lg  
+            border-r-2 border-zinc-600
+            focus:outline-none grid place-content-center
+            focus:underline hover:underline
+             underline-offset-8 decoration-fuchsia-800
             capitalize transition-all ease-out duration-500 -tracking-wider`}
              ><h4 
                 >{index === 0? 'home' : item}</h4></a>
         </Link>
         ))}
       </nav>
+
+        <div 
+         className=" 
+          h-full w-20
+          flex flex-col items-center justify-center
+          border-l-2 border-zinc-600
+          bg-zinc-300 relative"
+         >
+        <BsCart3   
+            className="
+          lg:text-4xl text-3xl grow p-0.5"/>
+        <h5 
+         className="
+          w-full
+          text-center
+          text-white
+          font-bold 
+          bg-zinc-400"
+         >{item}</h5>
+      </div>
       </section>
   )
 }

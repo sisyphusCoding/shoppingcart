@@ -11,7 +11,6 @@ const Layout :FC<Props> = ({children}) => {
     <main
       className="
       text-zinc-600 
-      p-5
       gap-5
       relative 
       bg-zinc-300
