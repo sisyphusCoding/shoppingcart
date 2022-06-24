@@ -5,7 +5,6 @@ const Home: NextPage = () => {
     <div className='
       h-full
       flex flex-col items-center justify-center'>
-
     <h1 
      className='
         uppercase

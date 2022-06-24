@@ -6,7 +6,7 @@ import {BsCart3} from 'react-icons/bs'
 
 import { Squeeze as Hamburger, Squeeze } from 'hamburger-react'
 
-import {motion} from 'framer-motion'
+import {AnimatePresence, motion, Variants} from 'framer-motion'
 
 const Navbar:FC = () => {
 
@@ -14,12 +14,20 @@ const Navbar:FC = () => {
 
   const router =useRouter()
 
-  const navLink:string[] = ['/','store','about']
-
-  const navString:string[] = ['/','/store','/about']
-
   const [isOpen,setIsOpen] = useState<boolean>(false)
- 
+
+  let namePath = router.pathname
+
+
+  useEffect(()=>{
+    
+    if(isOpen){
+    setIsOpen(false)
+    }
+
+  },[namePath])
+
+
 
   return(
       <section
@@ -36,9 +44,9 @@ const Navbar:FC = () => {
 
         <div
          className={`
-        ${isOpen? 'border-transparent':'border-r-2 border-zinc-600 delay-1000'}
+        ${isOpen? 'border-transparent':'border-r-2 border-zinc-600 delay-[1s] text-zinc-600'}
         z-20 
-        transition-all ease duration-100
+        transition-all ease-linear duration-400
         items-center justify-center
         lg:hidden flex w-20 h-full`}>
         <Squeeze toggled={isOpen} toggle={setIsOpen} />
@@ -47,19 +55,12 @@ const Navbar:FC = () => {
       <nav
         style={{transformOrigin:'top'}}
        className={`
-          ${isOpen?'scale-y-100':'scale-y-0 lg:scale-y-100'}
+          hidden lg:flex
           will-change-transform
           transition-all ease-[cubic-bezier(.86,-0.01,.75,.88)] duration-1000
-          absolute lg:relative 
-          lg:h-full h-screen w-[80vw] lg:w-fit
-          top-0 left-0
-          bg-black lg:bg-transparent
+          h-full
           z-10 
-          flex-col lg:flex-row
-          items-start justify-start
-          py-40 lg:py-0 px-20 lg:px-0
-          gap-10 lg:gap-0
-          flex  lg:items-center lg:justify-center`}
+          items-center justify-center`}
         >
         {navLink.map((item,index)=>(
               
@@ -68,8 +69,6 @@ const Navbar:FC = () => {
             href={index ===0? item: `/${item}`}>
             <a 
             className={`
-
-            ${isOpen? 'opacity-100 delay-1000  duration-500':'opacity-0 lg:opacity-100  duration-100'}
             ${router.pathname === navString[index]?  
             'bg-zinc-400 text-zinc-900 focus:no-underline hover:no-underline'
             :'no-underline'}
@@ -85,8 +84,9 @@ const Navbar:FC = () => {
         </Link>
         ))}
       </nav>
-
-
+      <AnimatePresence exitBeforeEnter> 
+        {isOpen? <MobileNavbar namePath={router.pathname}/> :''}
+      </AnimatePresence>
         <div 
          className=" 
           h-full w-20
@@ -109,6 +109,76 @@ const Navbar:FC = () => {
       </section>
   )
 }
+
+interface Props{
+  namePath:string
+}
+
+const MobileNavbar:FC<Props> = ({namePath}) => {
+
+
+  let parent:Variants = {
+      hidden:{scaleY:0},
+      animate:{scaleY:1 , transition:{staggerChildren:.2 , damping:50,stiffness:500}},
+      exit:{scaleY:0,transition:{staggerChildren:.2,staggerDirection:-1,delay:1}}
+  }
+
+
+  let child:Variants ={
+      hidden:{opacity:0},
+      animate:{opacity:1},
+    exit:{opacity:0}
+  }
+
+
+
+
+  return(
+    <motion.nav 
+      variants={parent}
+      initial='hidden'
+      animate='animate'
+      exit='exit'
+      style={{transformOrigin:'top'}}
+     className="
+      lg:hidden
+      absolute  top-0 left-0 z-10
+      px-20 py-52 gap-8
+      h-screen min-w-full flex flex-col items-start justify-start bg-zinc-900"
+      >
+        {navLink.map((item,index)=>(      
+        <Link
+            key={item}
+            href={index ===0? item: `/${item}`}>
+            <motion.a  
+            variants={child}
+            key={index} 
+            className={`
+            cursor-pointer
+            ${namePath === navString[index]?  
+            'bg-zinc-400 text-zinc-900 focus:no-underline hover:no-underline'
+            :'no-underline'}
+             px-4 lg:h-full
+            text-4xl 
+            w-full
+            lg:border-r-2 lg:border-zinc-600
+            rounded-lg
+            focus:outline-none flex items-start
+            focus:underline hover:underline
+             underline-offset-8 decoration-fuchsia-800
+            capitalize transition-all ease-out -tracking-wider`}
+             ><h4 
+                >{index === 0? 'home' : item}</h4></motion.a>
+        </Link>
+        ))}
+    </motion.nav>
+  )
+}
+
+
+  const navLink:string[] = ['/','store','about']
+
+  const navString:string[] = ['/','/store','/about']
 
 
 export default Navbar
