@@ -33,8 +33,9 @@ const Navbar:FC = () => {
       <section
         className="
         h-16 lg:h-20
-        relative
-        border-b-2 border-zinc-600
+        sticky top-0 
+        z-10
+        border-b-2 border-zinc-900
         bg-zinc-100
         items-center justify-between
         flex min-w-full
@@ -44,7 +45,7 @@ const Navbar:FC = () => {
 
         <div
          className={`
-        ${isOpen? 'border-transparent':'border-r-2 border-zinc-600 delay-[1s] text-zinc-600'}
+        ${isOpen? 'border-transparent':'border-r-2 border-zinc-900 delay-[1s] text-zinc-600'}
         z-20 
         transition-all ease-linear duration-400
         items-center justify-center
@@ -74,7 +75,7 @@ const Navbar:FC = () => {
             :'no-underline'}
              px-4 lg:h-full
             lg:text-lg  
-            lg:border-r-2 lg:border-zinc-600
+            lg:border-r-2 lg:border-zinc-900
             focus:outline-none grid place-content-center
             focus:underline hover:underline
              underline-offset-8 decoration-fuchsia-800
@@ -119,14 +120,14 @@ const MobileNavbar:FC<Props> = ({namePath}) => {
 
   let parent:Variants = {
       hidden:{scaleY:0},
-      animate:{scaleY:1 , transition:{staggerChildren:.2 , damping:50,stiffness:500}},
-      exit:{scaleY:0,transition:{staggerChildren:.2,staggerDirection:-1,delay:1}}
+      animate:{scaleY:1 , transition:{staggerChildren:.5, delayChildren:.3 ,duration:1}},
+      exit:{scaleY:0,transition:{staggerChildren:.2,staggerDirection:-1,when:'afterChildren'}}
   }
 
 
   let child:Variants ={
       hidden:{opacity:0},
-      animate:{opacity:1},
+      animate:{opacity:1 ,transition:{}},
     exit:{opacity:0}
   }
 
@@ -144,7 +145,7 @@ const MobileNavbar:FC<Props> = ({namePath}) => {
       lg:hidden
       absolute  top-0 left-0 z-10
       px-20 py-52 gap-8
-      h-screen min-w-full flex flex-col items-start justify-start bg-zinc-900"
+      h-screen min-w-full flex flex-col items-start justify-start bg-black"
       >
         {navLink.map((item,index)=>(      
         <Link

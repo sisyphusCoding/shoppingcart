@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "hazlenut",
+    "price": 10.99,
+    "imgUrl": "/coffee/haz.jpeg"
+  },
+  {
+    "id": 2,
+    "name": "DECAF",
+    "price": 8.99,
+    "imgUrl": "/coffee/dec.jpeg"
+  },
+  {
+    "id": 3,
+    "name": "French Roast",
+    "price": 12.99,
+    "imgUrl": "/coffee/fre.jpeg"
+  },
+  {
+    "id": 3,
+    "name": "Vienna Roast ",
+    "price": 6.99,
+    "imgUrl": "/coffee/vie.jpeg"
+  }
+]
