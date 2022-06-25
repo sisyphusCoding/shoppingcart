@@ -58,8 +58,8 @@ const Layout :FC<Props> = ({children}) => {
          className="
           top-0 left-0
           will-change-transform
-          lg:flex hidden
-            z-[5]
+          flex 
+          z-[5]
           bg-black bg-opacity-90 backdrop-filter backdrop-blur-sm
           h-full w-full absolute ">
         </motion.div>
