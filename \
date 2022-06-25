@@ -8,7 +8,6 @@ import { Squeeze as Hamburger, Squeeze } from "hamburger-react";
 
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import { useShoppingCart } from "../context/CartContext";
-import { openStdin } from "process";
 
 const Navbar: FC = () => {
   const { openCart, cartQuantity } = useShoppingCart();
@@ -88,54 +87,28 @@ const Navbar: FC = () => {
       <AnimatePresence exitBeforeEnter>
         {isOpen ? <MobileNavbar namePath={router.pathname} /> : ""}
       </AnimatePresence>
-      <AnimatePresence exitBeforeEnter>
-        {" "}
-        {cartQuantity > 0 ? (
-          <motion.div
-            initial={{opacity:0}}
-            animate={{opacity:1}}
-            exit={{opacity:0,transition:{when:'afterChildren',duration:1.2,ease:'circIn'}}}
-            className="
-            overflow-hidden
+      <div
+        className=" 
           h-full w-20
-          flex flex-col items-center justify-between
+          flex flex-col items-center justify-center
           border-l-2 border-zinc-600
           bg-zinc-300 relative"
-          >
-            <motion.div 
-              className="p-1"
-            initial={{ opacity: 0, y: '-100%' }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: '-100%', transition:{duration:.5} }}
-            transition={{ duration: 1.2, ease: "circOut" }}
-             >
-            <BsCart3
-              onClick={() => openCart()}
-              className=" 
-            cursor-pointer
-            transition-all ease duration-300
-            hover:opacity-25     
-            lg:text-4xl text-3xl grow "
-            />
-            </motion.div>
-            <motion.h5
-            key={cartQuantity}
-            initial={{ opacity: 0, y: '100%' }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: '100%' , transition:{duration:.5} }}
-            transition={{ duration: 1.2, ease: "circOut" }}
-              className="
+      >
+        <BsCart3
+          className="
+          lg:text-4xl text-3xl grow p-0.5"
+        />
+        <h5
+          className="
           w-full
           text-center
           text-white
           font-bold 
           bg-zinc-400"
-            >
-              {cartQuantity}
-            </motion.h5>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
+        >
+          {cartQuantity}
+        </h5>
+      </div>
     </section>
   );
 };

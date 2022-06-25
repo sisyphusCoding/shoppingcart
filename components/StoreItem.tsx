@@ -1,112 +1,110 @@
-import React,{FC, useState} from "react";
-import Image from 'next/image'
-import {motion} from 'framer-motion'
-import {formatCurrency} from '../utils/formatCurrenct'
-
-interface Props{
-  id:number
-  name:string
-  price:number
-  imgUrl:string
-
+import React, { FC, useState } from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { useShoppingCart } from "../context/CartContext";
+interface Props {
+  id: number;
+  name: string;
+  price: number;
+  imgUrl: string;
 }
 
+const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
+  const { getQuant, inc, dec, remove } = useShoppingCart();
 
-const StoreItem: FC<Props> = ({id,name,price,imgUrl}) => {
-const [num,setNum] = useState<number>(0)
+  const quantity = getQuant(id);
 
-  let isZero = num === 0 
+  let isZero = quantity === 0;
 
-return(
+  return (
     <section
-     className="
+      className="
     
       bg-zinc-100
       border-2 border-zinc-800
      shadow-[5px_5px_0_rgba(0,0,0,1)]
       flex flex-row lg:flex-col
-       lg:w-fit w-[80vmin] "
-      >
-      <div
-       className="w-1/2 lg:w-[30vmin] h-auto">
-        <Image layout="responsive" 
-                objectFit="cover"
-                src={imgUrl} 
-                height={300} width={250} alt={name} />
+       lg:w-fit w-[85vmin] "
+    >
+      <div className="w-1/2 lg:w-[30vmin] h-auto">
+        <Image
+          layout="responsive"
+          objectFit="cover"
+          src={imgUrl}
+          height={300}
+          width={250}
+          alt={name}
+        />
       </div>
-     
-    <div
-     className="
+
+      <div
+        className="
         lg:border-t-2  
         lg:border-l-0
         border-l-2
         lg:gap-10
         border-zinc-800
         flex flex-col items-center justify-between
-        grow">
-
-        <div 
-         className="
+        grow"
+      >
+        <div
+          className="
             capitalize
             md:text-lg
             p-3
             border-b-2 border-zinc-800
-          flex w-full justify-between items-center ">
+          flex w-full justify-between items-center "
+        >
           <h3>{name}</h3>
-         <h3 className="font-semibold" ><span className="text-base">$</span>{price}</h3>
+          <h3 className="font-semibold">
+            <span className="text-base">$</span>
+            {price}
+          </h3>
         </div>
 
-
-       <div 
-         className="w-full"
-         >
-        
-          <motion.button 
+        <div className="w-full">
+          <motion.button
             key={isZero.toString()}
-            initial={{height:0}}
-            animate={{height:'fit-content'}} 
-           className={`
+            initial={{ height: 0 }}
+            animate={{ height: "fit-content" }}
+            className={`
+            cursor-pointer
             bg-cyan-700
             text-zinc-200
             flex items-center
             outline-zinc-900 outline outline-2
             capitalize w-full `}
-            >
-            {num<1?
-              
-            <h3 
-              className="p-3 w-full "
-              onClick={()=>setNum(num+1)}
-               >add to cart</h3>
-            :
-              <div
-                className="flex w-full  justify-between text-2xl relative"
-                >
-               <h5
+          >
+            {quantity < 1 ? (
+              <h3 className="p-3 w-full " onClick={() => inc(id)}>
+                add to cart
+              </h3>
+            ) : (
+              <div className="flex w-full  justify-between text-lg md:text-2xl relative">
+                <h5
                   className="
                   w-3/12
                   border-r-2 border-zinc-900 h-full p-2"
-              onClick={()=>setNum(num-1)}
-                 >-</h5>
-                  <h1 
-                    className="grow p-2"
-                   > 
-                   {num} 
-                    </h1>
+                  onClick={() => dec(id)}
+                >
+                  -
+                </h5>
+                <h1 className="grow p-2">{quantity}</h1>
                 <h5
                   className="
                   w-3/12
                   p-2 border-l-2 border-zinc-900"
-                onClick={()=>setNum(num+1)}
-                 >+</h5>
-                 
+                  onClick={() => inc(id)}
+                >
+                  +
+                </h5>
 
-               <div 
-                  onClick={()=>setNum(0)}
-                  style={{transformOrigin:'left'}}
-                 className={`
+                <div
+                  onClick={() => remove(id)}
+                  style={{ transformOrigin: "left" }}
+                  className={`
                   transform-cpu
-                  ${isZero? 'scale-x-0' :'scale-x-100'}
+                  ${isZero ? "scale-x-0" : "scale-x-100"}
                   grid place-content-center
                   h-full
                   text-xs
@@ -117,28 +115,16 @@ return(
                   w-fit 
                   px-2 bg-red-600
                   absolute -right-7 `}
-                 >
+                >
                   <span>X</span>
-                </div>     
-
-              </div>}
+                </div>
+              </div>
+            )}
           </motion.button>
-
-        </div>     
-
-
+        </div>
       </div>
-
     </section>
+  );
+};
 
-
-
-
-
-
-  )
-
-}
-
-
-export default StoreItem
+export default StoreItem;
