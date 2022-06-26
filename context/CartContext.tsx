@@ -14,6 +14,7 @@ interface Props {
 }
 
 interface CartProps {
+  isOpen:boolean
   openCart: () => void;
   closeCart: () => void;
   getQuant: (id: number) => number;
@@ -93,6 +94,7 @@ export function CartProvider({ children }: Props) {
   return (
     <CartContext.Provider
       value={{
+        isOpen,
         getQuant,
         inc,
         dec,

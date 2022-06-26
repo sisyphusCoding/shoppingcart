@@ -3,33 +3,38 @@ import { useShoppingCart } from "../context/CartContext";
 import storeItems from "../data/coffee.json";
 import Image from "next/image";
 
-interface Props {
+interface cartProps {
   id: number;
   quantity: number;
 }
 
-const CartItem: FC<Props> = ({ id, quantity }) => {
+
+const CartItem : FC <cartProps> = ({id,quantity}) => {
+
   const { remove } = useShoppingCart();
 
   const item = storeItems.find(el => el.id === id);
 
-  if (item == null) return;
+  if (item == null) return null
 
-  return (
+  return(
     <div
       className="
+      border-2 border-zinc-800
+      hover:shadow-[5px_5px_0_#71717a]
+      shadow-[1px_1px_0_#71717a]
+      transition-all duration-500 ease
       overflow-hidden
-      h-[18vmin]
-      border-2 border-zinc-300 
+      h-[15vmin] 
       min-w-full
       flex items-center justify-between"
     >
-      <div className="w-1/3  block h-full">
+      <div className="w-1/4  block h-full">
         <Image
           layout="responsive"
           objectFit="cover"
           height={200}
-          width={200}
+          width={140}
           src={item.imgUrl}
           alt={item.name}
         />
@@ -37,33 +42,46 @@ const CartItem: FC<Props> = ({ id, quantity }) => {
 
       <div
         className="
+        text-[.85rem]
+        md:text-base 
+        bg-zinc-200
+        border-l-2 border-zinc-600
         h-full
         capitalize
-        p-3
-        items-start
-        flex justify-evenly
-        flex-col
+        items-end
+        flex justify-between
+        flex-col        
         grow"
       >
-        <h3>{item.name}</h3>
-        <h3>
+        <h3
+          className="
+          uppercase
+          px-3 py-1
+          text-right
+          w-full
+          font-bold border-b-2 border-zinc-600"
+        >
+          {item.name}
+        </h3>
+        <h3 className="">
           ${item.price} X {quantity} = ${item.price * quantity}
         </h3>
         <button
           onClick={() => remove(id)}
           className="
+          text-zinc-800
           capitalize
           transition-all ease duration-200
-          border-2 border-red-500
-          hover:border-white
-          hover:shadow-[2px_2px_0_white]
+          hover:border-transparent
+          border-2 border-red-700
+          hover:shadow-[5px_5px_0_red]
           shadow-[2px_2px_0_red]
           text-xs
           py-1
           px-2
           bg-red-600"
         >
-          delete
+          remove
         </button>
       </div>
     </div>

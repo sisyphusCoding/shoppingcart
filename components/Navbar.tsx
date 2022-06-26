@@ -40,13 +40,13 @@ const Navbar: FC = () => {
     >
       <div
         className={`
-        ${
-          isOpen
-            ? "border-transparent"
-            : "border-r-2 border-zinc-900 delay-[1s] text-zinc-600"
-        }
-        z-20 
-        transition-all ease-linear duration-400
+        ${isOpen ? "border-transparent " : " border-zinc-900"}
+        z-20  border-r-2
+        hover:border-transparent
+        transition-all ease-in duration-300
+        hover:bg-zinc-400
+        text-zinc-700
+        bg-opacity-20
         items-center justify-center
         lg:hidden flex w-20 h-full`}
       >
@@ -92,9 +92,25 @@ const Navbar: FC = () => {
         {" "}
         {cartQuantity > 0 ? (
           <motion.div
-            initial={{opacity:0}}
-            animate={{opacity:1}}
-            exit={{opacity:0,transition:{when:'afterChildren',duration:1.2,ease:'circIn'}}}
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{
+              opacity: 1,
+              x: "0%",
+              transition: {
+                duration: 0.5,
+                ease: "circOut",
+                staggerChildren: 0.5
+              }
+            }}
+            exit={{
+              opacity: 0,
+              x: "100%",
+              transition: {
+                when: "afterChildren",
+                duration: 1.2,
+                ease: "circIn"
+              }
+            }}
             className="
             overflow-hidden
           h-full w-20
@@ -102,34 +118,35 @@ const Navbar: FC = () => {
           border-l-2 border-zinc-600
           bg-zinc-300 relative"
           >
-            <motion.div 
+            <motion.div
               className="p-1"
-            initial={{ opacity: 0, y: '-100%' }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: '-100%', transition:{duration:.5} }}
-            transition={{ duration: 1.2, ease: "circOut" }}
-             >
-            <BsCart3
-              onClick={() => openCart()}
-              className=" 
+              initial={{ opacity: 0, y: "-100%" }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: "-100%", transition: { duration: 0.5,ease:'circOut' } }}
+              transition={{ duration: 1.2, ease: "circOut" }}
+            >
+              <BsCart3
+                onClick={() => openCart()}
+                className=" 
             cursor-pointer
             transition-all ease duration-300
             hover:opacity-25     
             lg:text-4xl text-3xl grow "
-            />
+              />
             </motion.div>
             <motion.h5
-            key={cartQuantity}
-            initial={{ opacity: 0, y: '100%' }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: '100%' , transition:{duration:.5} }}
-            transition={{ duration: 1.2, ease: "circOut" }}
+              key={cartQuantity}
+              initial={{ opacity: 0, y: "100%" }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: "100%", transition: { duration: .5 ,ease:'circOut'}}}
+              transition={{ duration: .6, ease: "circOut" }}
               className="
           w-full
+          
           text-center
           text-white
           font-bold 
-          bg-zinc-400"
+          bg-zinc-500"
             >
               {cartQuantity}
             </motion.h5>

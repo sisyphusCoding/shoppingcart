@@ -1,27 +1,36 @@
 import { NextPage } from "next";
-import React from "react";
+import React, { useState } from "react";
 import StoreItem from "../components/StoreItem";
+import { useShoppingCart } from "../context/CartContext";
 
 import storeItems from '../data/coffee.json'
 
 const Store:NextPage = () => {
+
+  const{isOpen} = useShoppingCart()
+
+
+
   return(
     <div
-     className="
+     className={`
+      ${isOpen? 'overflow-hidden max-h-[90vmin]':' overflow-scroll'}
+      z-10
       gap-[10vmin] 
       min-w-full
-      py-10 lg:px-20
+      min-h-full
+      lg:py-10 lg:px-20
+      py-5
       flex-wrap
       justify-between lg:items-start items-center
-      flex flex-col lg:flex-row  overflow-scroll max-h-full"
+      flex flex-col lg:flex-row `}
       >
-      {storeItems.map((item,index)=>(
-            
+      {storeItems.map((item,index)=>(          
           <div
             className="px-4"
             key={`${item}`}
             >
-          <StoreItem {...item} />
+              <StoreItem {...item} />
             </div>
       ))}
     </div>

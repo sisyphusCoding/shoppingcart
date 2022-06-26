@@ -64,7 +64,7 @@ const Layout: FC<Props> = ({ children }) => {
 
         <AnimatePresence exitBeforeEnter>
           <motion.div
-            className="z-[2] h-full w-full grow flex items-stretch justify-center"
+            className="z-[2] h-full w-full grow flex items-stretch justify-center overflow-hidden max-w-full"
             variants={blink}
             key={router.pathname}
             initial="hidden"

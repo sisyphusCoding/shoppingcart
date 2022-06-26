@@ -5,6 +5,10 @@
 @tailwind utilities;
 
 
+@font-face{
+  font-family: 'ZIZO';
+  src: url('../font/Zizo.ttf')
+}
 
 html,
 body {

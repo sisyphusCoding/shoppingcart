@@ -18,20 +18,21 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
 
   return (
     <section
-      className="
-    
+      className=" 
       bg-zinc-100
-      border-2 border-zinc-800
-     shadow-[5px_5px_0_rgba(0,0,0,1)]
+      border-4 border-zinc-800
+      hover:shadow-[15px_15px_15px_5px_#71717a]
+      shadow-[15px_15px_5px_-5px_#71717a]
+      transition-all ease duration-300
       flex flex-row lg:flex-col
        lg:w-fit w-[85vmin] "
     >
-      <div className="w-1/2 lg:w-[30vmin] h-auto">
+      <div className="w-1/2 lg:w-[30vmin]">
         <Image
           layout="responsive"
           objectFit="cover"
           src={imgUrl}
-          height={300}
+          height={250}
           width={250}
           alt={name}
         />
@@ -39,10 +40,9 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
 
       <div
         className="
-        lg:border-t-2  
+        lg:border-t-4
         lg:border-l-0
-        border-l-2
-        lg:gap-10
+        border-l-4
         border-zinc-800
         flex flex-col items-center justify-between
         grow"
@@ -52,7 +52,7 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
             capitalize
             md:text-lg
             p-3
-            border-b-2 border-zinc-800
+            border-b-4 border-zinc-800
           flex w-full justify-between items-center "
         >
           <h3>{name}</h3>
@@ -63,35 +63,48 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
         </div>
 
         <div className="w-full">
+
           <motion.button
             key={isZero.toString()}
             initial={{ height: 0 }}
-            animate={{ height: "fit-content" }}
+            animate={{ height: "fit-content"}}
             className={`
             cursor-pointer
-            bg-cyan-700
+            bg-sky-800
             text-zinc-200
             flex items-center
-            outline-zinc-900 outline outline-2
+            outline-zinc-800 outline outline-4
             capitalize w-full `}
           >
             {quantity < 1 ? (
-              <h3 className="p-3 w-full " onClick={() => inc(id)}>
+              <h3 className="
+                ease duration-300 transition-colors
+                p-3 w-full bg-transparent hover:bg-sky-600" onClick={() => inc(id)}>
                 add to cart
               </h3>
             ) : (
               <div className="flex w-full  justify-between text-lg md:text-2xl relative">
                 <h5
-                  className="
+                  className={` 
+                  hover:bg-sky-600   
+                  transition-colors ease duration-300
                   w-3/12
-                  border-r-2 border-zinc-900 h-full p-2"
+                  border-zinc-900  
+                  border-r-2 h-full p-2`}
                   onClick={() => dec(id)}
                 >
                   -
                 </h5>
-                <h1 className="grow p-2">{quantity}</h1>
+                <h1 className="grow p-2">
+                    
+                    <motion.span>
+                    {quantity}
+                    </motion.span>
+                  </h1>
                 <h5
                   className="
+                  hover:bg-sky-600   
+                  transition-colors ease duration-300
                   w-3/12
                   p-2 border-l-2 border-zinc-900"
                   onClick={() => inc(id)}
@@ -111,7 +124,7 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
                   font-mono
                   transition-all ease duration-200
                   shadow-[1px_1px_0_black]
-                  hover:shadow-[3px_3px_0_black]
+                  hover:shadow-[5px_5px_0_black]
                   w-fit 
                   px-2 bg-red-600
                   absolute -right-7 `}

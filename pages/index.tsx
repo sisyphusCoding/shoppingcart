@@ -5,25 +5,38 @@ const Home: NextPage = () => {
   return (
     <div className='
       min-h-full min-w-full
-      flex  items-center justify-end'>
+      flex  lg:items-center items-start justify-end'>
     <section 
         className='
-        hover:bg-opacity-30
+        text-[rgba(255,255,255,0.65)]
+        hover:bg-opacity-10
+        lg:bg-opacity-100 bg-opacity-40
         transition-all ease duration-300
         text-zinc-200
+        px-10
         bg-black z-10 backdrop-filter backdrop-blur-md
-        h-full px-10 w-fit flex flex-col items-center justify-evenly'>
+        w-full h-1/2 
+        lg:h-full lg:w-fit flex flex-col items-center justify-evenly'>
     <h1 
-     className='
-        filter
-        drop-shadow-[0_5px_5px_rgba(0,0,0,.7)]
-
-      
-        uppercase
+     className=' 
+      tracking-tighter
+        w-full 
+        drop-shadow-[0_5px_5px_rgba(0,0,0,.7)] 
+        flex-col flex
         text-[clamp(1.2rem,1.2rem+8vmin,8rem)]
-        tracking-tighter
           '>
-      caffeined
+           <span
+            className='
+            uppercase
+            z-40
+            filter
+             right-0  mix-blend-color-dodge'
+             >caffeined</span> 
+           <span
+            className='lg:text-xl md:text-lg text-xs w-full text-right tracking-tighter'
+             >
+             – we&apos;ve got your <strong className='text-yellow-400' >morning</strong> covered.
+          </span> 
       </h1>
       
 
@@ -32,9 +45,9 @@ const Home: NextPage = () => {
         border-2 
         border-transparent
         hover:border-zinc-500 
-        bg-zinc-900 bg-opacity-80
+        bg-zinc-800 bg-opacity-80
         shadow-2xl
-        z-10 rounded-xl  px-4 py-3' 
+        z-10 rounded-xl  px-4 py-1' 
       >
     <Link
        href={'/store'}>
@@ -44,12 +57,12 @@ const Home: NextPage = () => {
         >
           <SiBuymeacoffee 
             className='   
-            text-[clamp(1.2rem,1.2rem+6vmin,6rem)]
+            text-[clamp(.8rem,.8rem+6vmin,6rem)]
             ' />
             <h4 
             className='
             text-left
-            text-[clamp(1.2rem,1.2rem+1.7vmin,2rem)] '
+            text-[clamp(.6rem,.6rem+1.7vmin,2rem)]'
              >Buy our <br/> best sellers</h4>
         </a>
     </Link>
