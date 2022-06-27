@@ -28,6 +28,7 @@ const Layout: FC<Props> = ({ children }) => {
   return (
     <main
       className="
+      font-manrope
       text-zinc-600 
       relative 
       bg-zinc-300

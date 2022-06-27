@@ -27,7 +27,8 @@ const Navbar: FC = () => {
   }, [namePath]);
 
   return (
-    <div className="relative min-w-full ">
+    <div className=" min-w-full sticky top-0  z-10 ">
+
       <AnimatePresence exitBeforeEnter>
         {isOpen ? <MobileNavbar namePath={router.pathname} /> : ""}
       </AnimatePresence>
@@ -36,8 +37,6 @@ const Navbar: FC = () => {
         className={`
         overflow-hidden
         h-14 lg:h-20
-        sticky top-0 
-        z-10
         border-b-2 border-zinc-900
         bg-zinc-100
         items-center justify-between
@@ -213,8 +212,9 @@ const MobileNavbar: FC<Props> = ({ namePath }) => {
       exit="exit"
       style={{ transformOrigin: "top" }}
       className="
+
       lg:hidden
-      absolute  top-0 left-0 z-10
+      absolute  top-14 lg:top-20 left-0 z-10
       px-20 py-52 gap-8
       min-h-screen min-w-full flex flex-col items-start justify-start bg-black"
     >

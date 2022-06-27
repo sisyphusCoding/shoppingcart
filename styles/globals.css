@@ -6,9 +6,26 @@
 
 
 @font-face{
+  font-family: 'IBM PLEX MONO';
+  src: url('../font/IBM.otf')
+}
+
+@font-face{
+  font-family: 'Accuratist';
+  src: url('../font/Accuratist.ttf')
+}
+
+
+@font-face{
   font-family: 'ZIZO';
   src: url('../font/Zizo.ttf')
 }
+
+@font-face{
+  font-family: 'MANROPE';
+  src: url('../font/Manrope.otf')
+}
+
 
 html,
 body {

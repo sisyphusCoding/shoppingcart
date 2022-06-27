@@ -26,15 +26,16 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
       transition-all ease duration-300
       flex flex-col
       text-xs md:text-base
-      lg:w-fit w-[50vmin] md:w-[40vmin]"
+      lg:w-fit w-[70vmin] md:w-[40vmin] "
     >
-      <div className="w-full lg:w-[30vmin] border-b-2 border-zinc-800">
+      <div 
+        className="w-full overflow-hidden max-h-[40vmin] lg:h-auto lg:w-[30vmin] border-b-2 border-zinc-800">
         <Image
           layout="responsive"
           objectFit="cover"
           src={imgUrl}
           height={250}
-          width={250}
+          width={300}
           alt={name}
         />
       </div>

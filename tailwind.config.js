@@ -9,6 +9,9 @@ module.exports = {
     },
     fontFamily:{
       zizo:['ZIZO','serif'],
+      accuratist:['Accuratist', 'sans-serif'],
+      ibm: ['IBM PLEX MONO' , 'mono'],
+        manrope:['MANROPE','sans-serif']
     }
   },
   plugins: [],

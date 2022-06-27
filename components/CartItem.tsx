@@ -21,8 +21,8 @@ const CartItem: FC<cartProps> = ({ id, quantity }) => {
       h-[20vmin]
       md:h-[15vmin]
       relative
-      hover:shadow-[7px_7px_#71717a]
-      shadow-[2px_2px_0_#71717a]
+      hover:shadow-[12px_12px_#606060]
+      shadow-[5px_5px_0_#606060]
       transition-all duration-500 ease
       lg:min-w-full  
       flex items-center justify-between"
@@ -65,8 +65,9 @@ const CartItem: FC<cartProps> = ({ id, quantity }) => {
           transition-all ease duration-200
           hover:border-transparent
           text-xs
-          px-4 
-          hover:bg-red-400
+          py-2 px-3
+          hover:bg-red-800
+          hover:text-zinc-200
           bg-red-600"
           >
             X
