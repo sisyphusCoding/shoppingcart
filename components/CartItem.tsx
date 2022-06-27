@@ -40,7 +40,6 @@ const CartItem: FC<cartProps> = ({ id, quantity }) => {
 
       <div
         className="
-        text-[.85rem] 
         border-t-2 border-r-2 border-b-2 border-zinc-800
         md:text-base 
         bg-zinc-200 
@@ -53,9 +52,22 @@ const CartItem: FC<cartProps> = ({ id, quantity }) => {
       >
         <div
           className="
+          text-xs md:text-base
+          items-center
           bg-zinc-100
-          min-w-full flex justify-end border-b-2 border-zinc-800"
+          min-w-full flex justify-between border-b-2 border-zinc-800"
         >
+        <h3
+          className="
+          uppercase
+           py-1 px-1
+          text-left 
+
+          font-bold"
+        >
+          {item.name}
+        </h3>
+
           <button
             onClick={() => remove(id)}
             className="
@@ -64,7 +76,7 @@ const CartItem: FC<cartProps> = ({ id, quantity }) => {
           capitalize
           transition-all ease duration-200
           hover:border-transparent
-          text-xs
+
           py-2 px-3
           hover:bg-red-800
           hover:text-zinc-200
@@ -73,26 +85,15 @@ const CartItem: FC<cartProps> = ({ id, quantity }) => {
             X
           </button>
         </div>
-        <h3
-          className="
-          uppercase
-           py-1 px-1
-          text-left
-          text-xs
-          w-full
-          font-bold"
-        >
-          {item.name}
-        </h3>
-        <h3 className="text-xs p-1 flex justify-between min-w-full">
+        <h3 className="text-xs p-1 flex justify-between min-w-full md:text-base">
           <span>
             {" "}
             ${item.price}
-            <strong className="text-[0.6rem] px-2 font-bold">
+            <strong className="text-[0.6rem] md:text-xs px-2 font-bold">
               x{quantity}
             </strong>
           </span>
-          <span>${item.price * quantity}</span>
+          <span>${ item.price * quantity}</span>
         </h3>
       </div>
     </div>

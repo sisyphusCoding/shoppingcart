@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import { useShoppingCart } from "../context/CartContext";
 
 import { formatCurrency } from "../utils/formatCurrenct";
@@ -14,13 +14,36 @@ interface Props {
 }
 
 const Cart: FC<Props> = ({ isOpen }) => {
+
+  const lockScroll = useCallback(()=>{
+
+  document.body.style.overflow = 'hidden';
+  document.body.scrollTop = 0
+    document.documentElement.scrollTop = 0
+  },[])
+
+  const unlockScroll = useCallback(()=>{
+  document.body.style.overflow = '';
+  },[])
+
   const { closeCart, items, cartQuantity } = useShoppingCart();
 
   useEffect(() => {
     if (cartQuantity === 0) {
       closeCart();
     }
-  });
+  },[cartQuantity]);
+
+
+
+  useEffect(()=>{
+    if(isOpen){
+      lockScroll()
+    }else{ 
+      unlockScroll()
+    }
+  })
+
 
   const cartWrap: Variants = {
     hidden: { scaleX: 0 },
@@ -65,7 +88,7 @@ const Cart: FC<Props> = ({ isOpen }) => {
             animate="show"
             exit="exit"
             className=" 
-      z-40
+      z-50
       min-h-screen md:min-w-[60vmin]
       lg:min-w-[70vmin]
       min-w-full
@@ -131,11 +154,12 @@ const Cart: FC<Props> = ({ isOpen }) => {
             >
               <span className="text-lg lg:text-xl">Total:{""}</span>
               <motion.span>
-                $
-                {items.reduce((total, CartItem) => {
-                  const item = dataItems.find(i => i.id === CartItem.id);
-                  return total + (item?.price || 0) * CartItem.quantity;
-                }, 0)}
+                {formatCurrency(
+                  items.reduce((total, CartItem) => {
+                    const item = dataItems.find(i => i.id === CartItem.id);
+                    return total + (item?.price || 0) * CartItem.quantity;
+                  }, 0)
+                )}
               </motion.span>
             </motion.h1>
           </motion.section>
