@@ -26,14 +26,14 @@ const Cart:FC<Props> = ({isOpen}) => {
   
   const cartWrap:Variants = {
     hidden:{scaleX:0},
-    show:{scaleX:1,transition:{staggerChildren:0.25}}, 
-    exit:{scaleX:0,transition:{when:'afterChildren',staggerDirection:-1,staggerChildren:0.25}}
+    show:{scaleX:1,transition:{staggerChildren:0.2}}, 
+    exit:{scaleX:0,transition:{when:'afterChildren',staggerDirection:-1,staggerChildren:0.2}}
   }
 
   const childWrap:Variants ={
     hidden:{opacity:0},
-    show:{opacity:1},
-    exit:{opacity:0}
+    show:{opacity:1 , transition:{duration:1,ease:'circOut'}},
+    exit:{opacity:0 ,  transition:{duration:1,ease:'circOut'}}
   }
 
   return(
@@ -60,11 +60,11 @@ const Cart:FC<Props> = ({isOpen}) => {
       initial='hidden' animate='show' exit='exit'
      className=" 
       z-40
-      min-h-screen md:min-w-[80vmin]
-      lg:min-w-[60vmin]
-      min-w-[70vmin]
+      min-h-screen md:min-w-[60vmin]
+      lg:min-w-[70vmin]
+      min-w-full
       max-h-screen
-      bg-zinc-300
+      bg-zinc-100
       flex flex-col 
       items-center justify-between
       absolute top-0 right-0"

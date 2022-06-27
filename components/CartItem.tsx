@@ -8,33 +8,31 @@ interface cartProps {
   quantity: number;
 }
 
-
-const CartItem : FC <cartProps> = ({id,quantity}) => {
-
+const CartItem: FC<cartProps> = ({ id, quantity }) => {
   const { remove } = useShoppingCart();
 
   const item = storeItems.find(el => el.id === id);
 
-  if (item == null) return null
+  if (item == null) return null;
 
-  return(
+  return (
     <div
       className="
-      border-2 border-zinc-800
-      hover:shadow-[5px_5px_0_#71717a]
-      shadow-[1px_1px_0_#71717a]
+      h-[20vmin]
+      md:h-[15vmin]
+      relative
+      hover:shadow-[7px_7px_#71717a]
+      shadow-[2px_2px_0_#71717a]
       transition-all duration-500 ease
-      overflow-hidden
-      h-[15vmin] 
-      min-w-full
+      lg:min-w-full  
       flex items-center justify-between"
     >
-      <div className="w-1/4  block h-full">
+      <div className="h-[20vmin] md:h-[15vmin]  w-1/3 overflow-hidden border-2 border-zinc-800">
         <Image
           layout="responsive"
           objectFit="cover"
           height={200}
-          width={140}
+          width={200}
           src={item.imgUrl}
           alt={item.name}
         />
@@ -42,47 +40,59 @@ const CartItem : FC <cartProps> = ({id,quantity}) => {
 
       <div
         className="
-        text-[.85rem]
+        text-[.85rem] 
+        border-t-2 border-r-2 border-b-2 border-zinc-800
         md:text-base 
-        bg-zinc-200
-        border-l-2 border-zinc-600
+        bg-zinc-200 
         h-full
         capitalize
-        items-end
+        items-start
         flex justify-between
         flex-col        
         grow"
       >
-        <h3
+        <div
           className="
-          uppercase
-          px-3 py-1
-          text-right
-          w-full
-          font-bold border-b-2 border-zinc-600"
+          bg-zinc-100
+          min-w-full flex justify-end border-b-2 border-zinc-800"
         >
-          {item.name}
-        </h3>
-        <h3 className="">
-          ${item.price} X {quantity} = ${item.price * quantity}
-        </h3>
-        <button
-          onClick={() => remove(id)}
-          className="
+          <button
+            onClick={() => remove(id)}
+            className="
           text-zinc-800
+          font-bold
           capitalize
           transition-all ease duration-200
           hover:border-transparent
-          border-2 border-red-700
-          hover:shadow-[5px_5px_0_red]
-          shadow-[2px_2px_0_red]
           text-xs
-          py-1
-          px-2
+          px-4 
+          hover:bg-red-400
           bg-red-600"
+          >
+            X
+          </button>
+        </div>
+        <h3
+          className="
+          uppercase
+           py-1 px-1
+          text-left
+          text-xs
+          w-full
+          font-bold"
         >
-          remove
-        </button>
+          {item.name}
+        </h3>
+        <h3 className="text-xs p-1 flex justify-between min-w-full">
+          <span>
+            {" "}
+            ${item.price}
+            <strong className="text-[0.6rem] px-2 font-bold">
+              x{quantity}
+            </strong>
+          </span>
+          <span>${item.price * quantity}</span>
+        </h3>
       </div>
     </div>
   );

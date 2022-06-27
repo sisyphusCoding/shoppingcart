@@ -3,18 +3,14 @@ import React, { useState } from "react";
 import StoreItem from "../components/StoreItem";
 import { useShoppingCart } from "../context/CartContext";
 
-import storeItems from '../data/coffee.json'
+import storeItems from "../data/coffee.json";
 
-const Store:NextPage = () => {
+const Store: NextPage = () => {
+  const { isOpen } = useShoppingCart();
 
-  const{isOpen} = useShoppingCart()
-
-
-
-  return(
+  return (
     <div
-     className={`
-      ${isOpen? 'overflow-hidden max-h-[90vmin]':' overflow-scroll'}
+      className={`
       z-10
       gap-[10vmin] 
       min-w-full
@@ -24,18 +20,14 @@ const Store:NextPage = () => {
       flex-wrap
       justify-between lg:items-start items-center
       flex flex-col lg:flex-row `}
-      >
-      {storeItems.map((item,index)=>(          
-          <div
-            className="px-4"
-            key={`${item}`}
-            >
-              <StoreItem {...item} />
-            </div>
+    >
+      {storeItems.map((item, index) => (
+        <div className="px-4" key={`${item}`}>
+          <StoreItem {...item} />
+        </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
-
-export default Store
+export default Store;

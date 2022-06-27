@@ -27,19 +27,25 @@ const Navbar: FC = () => {
   }, [namePath]);
 
   return (
-    <section
-      className="
-        h-16 lg:h-20
+    <div className="relative min-w-full ">
+      <AnimatePresence exitBeforeEnter>
+        {isOpen ? <MobileNavbar namePath={router.pathname} /> : ""}
+      </AnimatePresence>
+
+      <section
+        className={`
+        overflow-hidden
+        h-14 lg:h-20
         sticky top-0 
         z-10
         border-b-2 border-zinc-900
         bg-zinc-100
         items-center justify-between
         flex min-w-full
-        "
-    >
-      <div
-        className={`
+        `}
+      >
+        <div
+          className={`
         ${isOpen ? "border-transparent " : " border-zinc-900"}
         z-20  border-r-2
         hover:border-transparent
@@ -49,24 +55,24 @@ const Navbar: FC = () => {
         bg-opacity-20
         items-center justify-center
         lg:hidden flex w-20 h-full`}
-      >
-        <Squeeze toggled={isOpen} toggle={setIsOpen} />
-      </div>
+        >
+          <Squeeze toggled={isOpen} toggle={setIsOpen} />
+        </div>
 
-      <nav
-        style={{ transformOrigin: "top" }}
-        className={`
+        <nav
+          style={{ transformOrigin: "top" }}
+          className={`
           hidden lg:flex
           will-change-transform
           transition-all ease-[cubic-bezier(.86,-0.01,.75,.88)] duration-1000
           h-full
           z-10 
           items-center justify-center`}
-      >
-        {navLink.map((item, index) => (
-          <Link key={item} href={index === 0 ? item : `/${item}`}>
-            <a
-              className={`
+        >
+          {navLink.map((item, index) => (
+            <Link key={item} href={index === 0 ? item : `/${item}`}>
+              <a
+                className={`
             ${
               router.pathname === navString[index]
                 ? "bg-zinc-400 text-zinc-900 focus:no-underline hover:no-underline"
@@ -79,81 +85,89 @@ const Navbar: FC = () => {
             focus:underline hover:underline
              underline-offset-8 decoration-fuchsia-800
             capitalize transition-all ease-out -tracking-wider`}
-            >
-              <h4>{index === 0 ? "home" : item}</h4>
-            </a>
-          </Link>
-        ))}
-      </nav>
-      <AnimatePresence exitBeforeEnter>
-        {isOpen ? <MobileNavbar namePath={router.pathname} /> : ""}
-      </AnimatePresence>
-      <AnimatePresence exitBeforeEnter>
-        {" "}
-        {cartQuantity > 0 ? (
-          <motion.div
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{
-              opacity: 1,
-              x: "0%",
-              transition: {
-                duration: 0.5,
-                ease: "circOut",
-                staggerChildren: 0.5
-              }
-            }}
-            exit={{
-              opacity: 0,
-              x: "100%",
-              transition: {
-                when: "afterChildren",
-                duration: 1.2,
-                ease: "circIn"
-              }
-            }}
-            className="
+              >
+                <h4>{index === 0 ? "home" : item}</h4>
+              </a>
+            </Link>
+          ))}
+        </nav>
+        <AnimatePresence exitBeforeEnter>
+          {" "}
+          {cartQuantity > 0 ? (
+            <motion.div
+              initial={{ opacity: 0, x: "100%" }}
+              animate={{
+                opacity: 1,
+                y: "0%",
+                x: "0%",
+                transition: {
+                  duration: 1,
+                  ease: "circOut",
+                  staggerChildren: 0.5,
+                  delayChildren: 0.5
+                }
+              }}
+              exit={{
+                opacity: 0,
+                x: "100%",
+                transition: {
+                  when: "afterChildren",
+                  duration: 2,
+                  ease: "circIn"
+                }
+              }}
+              className="
             overflow-hidden
-          h-full w-20
+          h-full w-20 max-h-full min-h-full
           flex flex-col items-center justify-between
           border-l-2 border-zinc-600
           bg-zinc-300 relative"
-          >
-            <motion.div
-              className="p-1"
-              initial={{ opacity: 0, y: "-100%" }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: "-100%", transition: { duration: 0.5,ease:'circOut' } }}
-              transition={{ duration: 1.2, ease: "circOut" }}
             >
-              <BsCart3
-                onClick={() => openCart()}
-                className=" 
+              <motion.div
+                className="h-full max-h-full p-1"
+                initial={{ opacity: 0, y: "-100%" }}
+                animate={{ opacity: 1, y: "0%" }}
+                exit={{
+                  opacity: 0,
+                  y: "-100%",
+                  transition: { duration: 1, ease: "circIn" }
+                }}
+                transition={{ duration: 0.6, ease: "circOut" }}
+              >
+                <BsCart3
+                  onClick={() => openCart()}
+                  className=" 
             cursor-pointer
             transition-all ease duration-300
             hover:opacity-25     
             lg:text-4xl text-3xl grow "
-              />
-            </motion.div>
-            <motion.h5
-              key={cartQuantity}
-              initial={{ opacity: 0, y: "100%" }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: "100%", transition: { duration: .5 ,ease:'circOut'}}}
-              transition={{ duration: .6, ease: "circOut" }}
-              className="
+                />
+              </motion.div>
+              <motion.h5
+                key={cartQuantity}
+                initial={{ opacity: 0, y: "100%" }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{
+                  opacity: 0,
+                  y: "100%",
+                  transition: { duration: 1, ease: "circIn" }
+                }}
+                transition={{ duration: 0.6, ease: "circOut" }}
+                className="
           w-full
-          
+          text-xs md:text-base
           text-center
           text-white
           font-bold 
           bg-zinc-500"
-            >
-              {cartQuantity}
-            </motion.h5>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
-    </section>
+              >
+                {cartQuantity}
+              </motion.h5>
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
+      </section>
+    </div>
   );
 };
 
@@ -166,11 +180,18 @@ const MobileNavbar: FC<Props> = ({ namePath }) => {
     hidden: { scaleY: 0 },
     animate: {
       scaleY: 1,
-      transition: { staggerChildren: 0.5, delayChildren: 0.3, duration: 1 }
+      transition: {
+        staggerChildren: 0.5,
+        delayChildren: 0.5,
+        ease: "circOut",
+        duration: 1
+      }
     },
     exit: {
       scaleY: 0,
       transition: {
+        ease: "circOut",
+        duration: 1.2,
         staggerChildren: 0.2,
         staggerDirection: -1,
         when: "afterChildren"
@@ -180,7 +201,7 @@ const MobileNavbar: FC<Props> = ({ namePath }) => {
 
   let child: Variants = {
     hidden: { opacity: 0 },
-    animate: { opacity: 1, transition: {} },
+    animate: { opacity: 1, transition: { ease: "circIn" } },
     exit: { opacity: 0 }
   };
 
@@ -195,7 +216,7 @@ const MobileNavbar: FC<Props> = ({ namePath }) => {
       lg:hidden
       absolute  top-0 left-0 z-10
       px-20 py-52 gap-8
-      h-screen min-w-full flex flex-col items-start justify-start bg-black"
+      min-h-screen min-w-full flex flex-col items-start justify-start bg-black"
     >
       {navLink.map((item, index) => (
         <Link key={item} href={index === 0 ? item : `/${item}`}>

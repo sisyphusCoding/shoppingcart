@@ -20,14 +20,15 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
     <section
       className=" 
       bg-zinc-100
-      border-4 border-zinc-800
+      border-2 border-zinc-800
       hover:shadow-[15px_15px_15px_5px_#71717a]
       shadow-[15px_15px_5px_-5px_#71717a]
       transition-all ease duration-300
-      flex flex-row lg:flex-col
-       lg:w-fit w-[85vmin] "
+      flex flex-col
+      text-xs md:text-base
+      lg:w-fit w-[50vmin] md:w-[40vmin]"
     >
-      <div className="w-1/2 lg:w-[30vmin]">
+      <div className="w-full lg:w-[30vmin] border-b-2 border-zinc-800">
         <Image
           layout="responsive"
           objectFit="cover"
@@ -40,73 +41,68 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
 
       <div
         className="
-        lg:border-t-4
-        lg:border-l-0
-        border-l-4
         border-zinc-800
         flex flex-col items-center justify-between
         grow"
       >
         <div
           className="
-            capitalize
-            md:text-lg
+            capitalize          
             p-3
-            border-b-4 border-zinc-800
-          flex w-full justify-between items-center "
+            border-b-2 border-zinc-800
+            flex w-full justify-between items-center"
         >
           <h3>{name}</h3>
           <h3 className="font-semibold">
-            <span className="text-base">$</span>
+            <span className="text-xs">$</span>
             {price}
           </h3>
         </div>
 
-        <div className="w-full">
-
+        <div className="w-full md:text-base text-xs">
           <motion.button
             key={isZero.toString()}
             initial={{ height: 0 }}
-            animate={{ height: "fit-content"}}
+            animate={{ height: "fit-content" }}
             className={`
             cursor-pointer
             bg-sky-800
             text-zinc-200
             flex items-center
-            outline-zinc-800 outline outline-4
+            outline-zinc-800 outline outline-2
             capitalize w-full `}
           >
             {quantity < 1 ? (
-              <h3 className="
+              <h3
+                className="
                 ease duration-300 transition-colors
-                p-3 w-full bg-transparent hover:bg-sky-600" onClick={() => inc(id)}>
+                md:p-3 py-2 w-full bg-transparent hover:bg-sky-600"
+                onClick={() => inc(id)}
+              >
                 add to cart
               </h3>
             ) : (
-              <div className="flex w-full  justify-between text-lg md:text-2xl relative">
+              <div className="flex w-full justify-between  relative">
                 <h5
                   className={` 
                   hover:bg-sky-600   
                   transition-colors ease duration-300
                   w-3/12
                   border-zinc-900  
-                  border-r-2 h-full p-2`}
+                  border-r-2 h-full md:p-3 py-2`}
                   onClick={() => dec(id)}
                 >
                   -
                 </h5>
-                <h1 className="grow p-2">
-                    
-                    <motion.span>
-                    {quantity}
-                    </motion.span>
-                  </h1>
+                <h1 className="grow md:p-3 py-2">
+                  <motion.span>{quantity}</motion.span>
+                </h1>
                 <h5
                   className="
                   hover:bg-sky-600   
                   transition-colors ease duration-300
                   w-3/12
-                  p-2 border-l-2 border-zinc-900"
+                md:p-3 py-2 border-l-2 border-zinc-900"
                   onClick={() => inc(id)}
                 >
                   +
