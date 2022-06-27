@@ -14,7 +14,7 @@ interface Props {
 }
 
 interface CartProps {
-  isOpen:boolean
+  isOpen: boolean;
   openCart: () => void;
   closeCart: () => void;
   getQuant: (id: number) => number;
@@ -37,7 +37,7 @@ export function useShoppingCart() {
 }
 
 export function CartProvider({ children }: Props) {
-  const [items, setItems] = useState<CartItem[]>([]);
+  const [items, setItems] = useLocalStorage<CartItem[]>("shopping",[]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   function getQuant(id: number) {

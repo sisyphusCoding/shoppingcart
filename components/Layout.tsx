@@ -59,7 +59,7 @@ const Layout: FC<Props> = ({ children }) => {
           will-change-transform
           flex 
           z-[5]
-          bg-black bg-opacity-90 backdrop-filter backdrop-blur-sm
+          bg-black 
           h-full w-full absolute "
         ></motion.div>
 

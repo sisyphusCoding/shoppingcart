@@ -28,7 +28,6 @@ const Navbar: FC = () => {
 
   return (
     <div className=" min-w-full sticky top-0  z-10 ">
-
       <AnimatePresence exitBeforeEnter>
         {isOpen ? <MobileNavbar namePath={router.pathname} /> : ""}
       </AnimatePresence>
@@ -180,10 +179,10 @@ const MobileNavbar: FC<Props> = ({ namePath }) => {
     animate: {
       scaleY: 1,
       transition: {
-        staggerChildren: 0.5,
-        delayChildren: 0.5,
-        ease: "circOut",
-        duration: 1
+        staggerChildren: 0.25,
+        delayChildren:.25,
+        ease:'circOut',
+        duration:1 
       }
     },
     exit: {
@@ -200,7 +199,7 @@ const MobileNavbar: FC<Props> = ({ namePath }) => {
 
   let child: Variants = {
     hidden: { opacity: 0 },
-    animate: { opacity: 1, transition: { ease: "circIn" } },
+    animate: { opacity: 1},
     exit: { opacity: 0 }
   };
 
@@ -212,11 +211,10 @@ const MobileNavbar: FC<Props> = ({ namePath }) => {
       exit="exit"
       style={{ transformOrigin: "top" }}
       className="
-
       lg:hidden
       absolute  top-14 lg:top-20 left-0 z-10
       px-20 py-52 gap-8
-      min-h-screen min-w-full flex flex-col items-start justify-start bg-black"
+      min-h-screen min-w-full flex flex-col items-start justify-start bg-zinc-900"
     >
       {navLink.map((item, index) => (
         <Link key={item} href={index === 0 ? item : `/${item}`}>
