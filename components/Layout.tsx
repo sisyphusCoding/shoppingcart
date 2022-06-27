@@ -28,7 +28,7 @@ const Layout: FC<Props> = ({ children }) => {
   return (
     <main
       className="
-      font-manrope
+    
       text-zinc-600 
       relative 
       bg-zinc-300
@@ -36,9 +36,8 @@ const Layout: FC<Props> = ({ children }) => {
       flex flex-col items-center justify-between"
     >
       <Head>
-        <title>Shopping Cart</title>
-        <meta name="description" content="shopping cart using next" />
-        <link rel="icon" href="/favicon.ico" />
+        <title>Caffeined</title>
+        <meta name="description" content="shopping cart for Caffeined" />
       </Head>
       <Navbar />
       <section
