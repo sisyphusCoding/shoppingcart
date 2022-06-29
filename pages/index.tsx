@@ -88,8 +88,8 @@ console.log(video)
         min-h-screen min-w-full'>
           <div 
            className='
-            loader
-            motion-safe:animate-spin 
+          loader
+           animate-spin 
            rounded-full
            h-20 w-20'/>
 

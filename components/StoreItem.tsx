@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, Variant, Variants } from "framer-motion";
 import { useShoppingCart } from "../context/CartContext";
@@ -15,9 +15,27 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
 
   let isZero = quantity === 0;
   const[imageLoaded,setImageLoaded] = useState<boolean>(false)
+  const handleimageLoad = useCallback(()=>{
+    setImageLoaded(true)
+  },[])
+
+
+  const imgRef = useRef<HTMLDivElement>(null)
+
+  let h , w
+
+  const{current:elImg} = imgRef
+  if(elImg){
+    h = elImg.clientHeight +2
+    w=elImg.clientWidth +2
+  }
+
+
   return (
     <motion.section
+      ref={imgRef}
       className=" 
+      overflow-hidden
       bg-zinc-100
       border-2 border-zinc-800
       hover:shadow-[15px_15px_15px_5px_#71717a]
@@ -27,9 +45,16 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
       text-xs md:text-base
       lg:w-fit w-[70vmin] md:w-[40vmin] "
     >
-      <div className="w-full overflow-hidden max-h-[40vmin] lg:h-auto lg:w-[30vmin] border-b-2 border-zinc-800">
-        <Image
-          onLoad={()=>setImageLoaded(true)}
+
+
+      <div
+        className={`
+        transition-all duration-1000 ease
+        w-full overflow-hidden max-h-[40vmin] lg:h-auto lg:w-[30vmin] border-b-2 border-zinc-800
+        ${imageLoaded? 'opacity-100':'opacity-0'}
+        `}>
+        <Image 
+          onLoad={handleimageLoad}
           layout="responsive"
           objectFit="cover"
           src={imgUrl}
@@ -37,11 +62,6 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
           width={300}
           alt={name}
         />
-        {!imageLoaded?
-          <div
-           className="
-           loader h-20 w-20 animate-spin" />
-        :null}  
       </div>
 
       <div
