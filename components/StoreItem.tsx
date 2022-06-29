@@ -49,9 +49,12 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
 
       <div
         className={`
-        transition-all duration-1000 ease
+      ${imageLoaded? 
+      ' filter blur-0 bg-none brightness-90 hover:brightness-100':
+      ' blur-xl filter brightness-50'}
+        transition-all duration-1000 ease delay-1000
         w-full overflow-hidden max-h-[40vmin] lg:h-auto lg:w-[30vmin] border-b-2 border-zinc-800
-        ${imageLoaded? 'opacity-100':'opacity-0'}
+       
         `}>
         <Image 
           onLoad={handleimageLoad}

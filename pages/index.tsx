@@ -1,14 +1,14 @@
 import type { NextPage } from 'next'
 import {SiBuymeacoffee} from 'react-icons/si'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 const Home: NextPage = () => {
 
- const[video,setVideo]= useState<boolean>(true) 
-console.log(video)
-  useEffect(()=>{
-    console.log('after:' , video)
-  },[video])
+ const[video,setVideo]= useState<boolean>(false) 
+
+  const handleVideoload = useCallback(()=>{
+      setVideo(true)
+  },[])
 
   return (
     <div className='
@@ -24,11 +24,11 @@ console.log(video)
         px-10
         bg-black z-10 backdrop-filter backdrop-blur-md
         w-full h-1/2 
-        lg:h-full lg:w-fit flex flex-col items-center justify-evenly'>
+        lg:h-full lg:w-1/2 flex flex-col items-center justify-evenly'>
     <h1 
      className=' 
       tracking-tighter
-        w-full 
+        w-3/4
         drop-shadow-[0_5px_5px_rgba(0,0,0,.7)] 
         flex-col flex
         text-[clamp(1.2rem,1.2rem+8vmin,8rem)]
@@ -76,30 +76,18 @@ console.log(video)
     </Link>
         </button>
       </section>
-      {video?  
        
-      <div
-        className='
-          backdrop-filter
-          bg-black bg-opacity-50 backdrop-blur-2xl
-         flex items-center justify-center 
-        z-10
-        absolute top-0 left-0
-        min-h-screen min-w-full'>
-          <div 
-           className='
-          loader
-           animate-spin 
-           rounded-full
-           h-20 w-20'/>
-
-          
-      </div>:null }
 
      <video
-        onCanPlay={()=>setVideo(false)}
+        preload='auto'
+        onCanPlayCapture={handleVideoload}
         autoPlay loop muted playsInline 
-      className=' top-0 left-0 h-full w-full object-cover z-0 absolute'>
+      className={`
+        ${video?'brightness-100':'brightness-0'} 
+        delay-500 transition-all ease duration-1000 
+        top-0 left-0 
+        h-full w-full 
+        object-cover z-0 absolute`}>
         <source 
           src='/coffee.mp4'/>
       </video>
