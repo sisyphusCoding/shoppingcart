@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, Variant, Variants } from "framer-motion";
 import { useShoppingCart } from "../context/CartContext";
 interface Props {
   id: number;
@@ -8,7 +8,6 @@ interface Props {
   price: number;
   imgUrl: string;
 }
-
 const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
   const { getQuant, inc, dec, remove } = useShoppingCart();
 
@@ -16,8 +15,11 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
 
   let isZero = quantity === 0;
 
+  
+
   return (
-    <section
+    
+    <motion.section 
       className=" 
       bg-zinc-100
       border-2 border-zinc-800
@@ -31,6 +33,7 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
       <div 
         className="w-full overflow-hidden max-h-[40vmin] lg:h-auto lg:w-[30vmin] border-b-2 border-zinc-800">
         <Image
+          
           layout="responsive"
           objectFit="cover"
           src={imgUrl}
@@ -133,7 +136,7 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
           </motion.button>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

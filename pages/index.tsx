@@ -1,7 +1,15 @@
 import type { NextPage } from 'next'
 import {SiBuymeacoffee} from 'react-icons/si'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 const Home: NextPage = () => {
+
+ const[video,setVideo]= useState<boolean>(true) 
+console.log(video)
+  useEffect(()=>{
+    console.log('after:' , video)
+  },[video])
+
   return (
     <div className='
       min-h-full min-w-full
@@ -68,11 +76,36 @@ const Home: NextPage = () => {
     </Link>
         </button>
       </section>
-     <video autoPlay loop muted playsInline 
+      {video?  
+       
+      <div
+        className='
+          backdrop-filter
+          bg-black bg-opacity-90 backdrop-blur-2xl
+         flex items-center justify-center 
+        z-10
+        absolute top-0 left-0
+        min-h-screen min-w-full'>
+          <div 
+           className='
+            loader
+            motion-safe:animate-spin 
+           rounded-full
+           h-20 w-20'/>
+
+          
+      </div>:null }
+
+     <video
+        onPlaying={()=>setVideo(false)}
+        autoPlay loop muted playsInline 
       className=' top-0 left-0 h-full w-full object-cover z-0 absolute'>
-        <source src='/coffee.mp4'/>
+        <source 
+
+       
+          src='/coffee.mp4'/>
       </video>
-    </div>
+   </div>
   )
 }
 

@@ -5,6 +5,7 @@
 @tailwind utilities;
 
 
+
 @font-face{
   font-family: 'IBM PLEX MONO';
   src: url('../font/IBM.otf')
@@ -42,3 +43,11 @@ a {
 * {
   box-sizing: border-box;
 }
+
+
+.loader{
+  border: 10px solid rgba(255,255,255,.3);
+  border-top: 10px solid #00a3d7; 
+}
+
+

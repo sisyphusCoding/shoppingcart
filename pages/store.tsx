@@ -2,12 +2,19 @@ import { NextPage } from "next";
 import React, { useState } from "react";
 import StoreItem from "../components/StoreItem";
 import { useShoppingCart } from "../context/CartContext";
-
+import{motion,Variants} from 'framer-motion'
 import storeItems from "../data/coffee.json";
 
 const Store: NextPage = () => {
   const { isOpen } = useShoppingCart();
 
+  const storeItem:Variants = {
+    hidden:{y:'100vh',opacity:0},
+    animate:{opacity:1,y:'0vh',transition:{
+        ease:'circOut' , duration:1.2
+      }},
+    exit:{opacity:0,y:'100vh',transition:{duration:.8}}
+  }
   return (
     <div
       className={`
@@ -22,9 +29,11 @@ const Store: NextPage = () => {
       flex flex-col lg:flex-row `}
     >
       {storeItems.map((item, index) => (
-        <div className="px-4" key={`${item}`}>
+        <motion.div 
+      variants={storeItem}
+          className="px-4" key={`${item}`}>
           <StoreItem {...item} />
-        </div>
+        </motion.div>
       ))}
     </div>
   );

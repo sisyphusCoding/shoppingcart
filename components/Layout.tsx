@@ -21,8 +21,8 @@ const Layout: FC<Props> = ({ children }) => {
 
   let blink: Variants = {
     hidden: { opacity: 0 },
-    animate: { opacity: 1, transition: { duration: 1.2, ease: "circIn" } },
-    exit: { opacity: 0, transition: { duration: 1.2, ease: "circOut" } }
+    animate: { opacity: 1, transition: { duration: 1.2, ease: "circIn", staggerChildren:.25 } },
+    exit: { opacity: 0, transition: { duration: 1.2, ease: "circOut", when:'afterChildren' } }
   };
 
   return (
