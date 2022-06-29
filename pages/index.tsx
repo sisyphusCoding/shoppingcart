@@ -97,12 +97,10 @@ console.log(video)
       </div>:null }
 
      <video
-        onPlaying={()=>setVideo(false)}
+        onCanPlay={()=>setVideo(false)}
         autoPlay loop muted playsInline 
       className=' top-0 left-0 h-full w-full object-cover z-0 absolute'>
         <source 
-
-       
           src='/coffee.mp4'/>
       </video>
    </div>
