@@ -81,7 +81,7 @@ console.log(video)
       <div
         className='
           backdrop-filter
-          bg-black bg-opacity-90 backdrop-blur-2xl
+          bg-black bg-opacity-50 backdrop-blur-2xl
          flex items-center justify-center 
         z-10
         absolute top-0 left-0
