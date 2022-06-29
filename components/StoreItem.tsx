@@ -14,12 +14,9 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
   const quantity = getQuant(id);
 
   let isZero = quantity === 0;
-
-  
-
+  const[imageLoaded,setImageLoaded] = useState<boolean>(false)
   return (
-    
-    <motion.section 
+    <motion.section
       className=" 
       bg-zinc-100
       border-2 border-zinc-800
@@ -30,10 +27,9 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
       text-xs md:text-base
       lg:w-fit w-[70vmin] md:w-[40vmin] "
     >
-      <div 
-        className="w-full overflow-hidden max-h-[40vmin] lg:h-auto lg:w-[30vmin] border-b-2 border-zinc-800">
+      <div className="w-full overflow-hidden max-h-[40vmin] lg:h-auto lg:w-[30vmin] border-b-2 border-zinc-800">
         <Image
-          
+          onLoad={()=>setImageLoaded(true)}
           layout="responsive"
           objectFit="cover"
           src={imgUrl}
@@ -41,6 +37,11 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
           width={300}
           alt={name}
         />
+        {!imageLoaded?
+          <div
+           className="
+           loader h-20 w-20 animate-spin" />
+        :null}  
       </div>
 
       <div
