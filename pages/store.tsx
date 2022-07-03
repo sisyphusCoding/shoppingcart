@@ -22,16 +22,18 @@ const Store: NextPage = () => {
       gap-[10vmin] 
       min-w-full
       min-h-full
-      lg:py-10 lg:px-20
-      py-5
-      flex-wrap
-      justify-between lg:items-start items-center
-      flex flex-col lg:flex-row `}
+      lg:py-10 lg:px-20 
+      px-12 py-6
+      grid place-content-center place-items-center
+      grid-cols-1 md:grid-cols-2 lg:grid-cols-3
+    
+      `}
     >
       {storeItems.map((item, index) => (
         <motion.div 
-      variants={storeItem}
-          className="px-4" key={`${item}`}>
+        className="min-w-full md:min-h-full"  
+        variants={storeItem}
+         key={`${item}`}>
           <StoreItem {...item} />
         </motion.div>
       ))}

@@ -7,24 +7,21 @@ import dataItems from "../data/coffee.json";
 import { AnimatePresence, motion } from "framer-motion";
 import CartItem from "./CartItem";
 import { Variants } from "framer-motion";
-import { isTemplateMiddle } from "typescript";
 
 interface Props {
   isOpen: boolean;
 }
 
 const Cart: FC<Props> = ({ isOpen }) => {
+  const lockScroll = useCallback(() => {
+    document.body.style.overflow = "hidden";
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }, []);
 
-  const lockScroll = useCallback(()=>{
-
-  document.body.style.overflow = 'hidden';
-  document.body.scrollTop = 0
-    document.documentElement.scrollTop = 0
-  },[])
-
-  const unlockScroll = useCallback(()=>{
-  document.body.style.overflow = '';
-  },[])
+  const unlockScroll = useCallback(() => {
+    document.body.style.overflow = "";
+  }, []);
 
   const { closeCart, items, cartQuantity } = useShoppingCart();
 
@@ -32,24 +29,28 @@ const Cart: FC<Props> = ({ isOpen }) => {
     if (cartQuantity === 0) {
       closeCart();
     }
-  },[cartQuantity]);
+  }, [cartQuantity,closeCart]);
 
-
-
-  useEffect(()=>{
-    if(isOpen){
-      lockScroll()
-    }else{ 
-      unlockScroll()
+  useEffect(() => {
+    if (isOpen) {
+      lockScroll();
+    } else {
+      unlockScroll();
     }
-  })
-
+  });
 
   const cartWrap: Variants = {
-    hidden: { scaleX: 0 },
-    show: { scaleX: 1, transition: { staggerChildren: 0.1 } },
+    hidden: { x: "100%" },
+    show: {
+      x: "0%",
+      transition: {
+        ease: "circOut",
+        duration: 1,
+        staggerChildren: 0.25
+      }
+    },
     exit: {
-      scaleX: 0,
+      x: "150%",
       transition: {
         when: "afterChildren",
         staggerDirection: -1,
@@ -62,7 +63,7 @@ const Cart: FC<Props> = ({ isOpen }) => {
   const childWrap: Variants = {
     hidden: { opacity: 0 },
     show: { opacity: 1, transition: { duration: 1, ease: "circOut" } },
-    exit: { opacity: 0, transition: { duration: 1, ease: "circOut" } }
+    exit: { opacity: 0, transition: { duration: 1, ease: "circIn" } }
   };
 
   return (
@@ -93,30 +94,31 @@ const Cart: FC<Props> = ({ isOpen }) => {
       lg:min-w-[70vmin]
       min-w-full
       max-h-screen
-      bg-slate-300
       flex flex-col 
+      bg-zinc-200
       items-center justify-between
       absolute top-0 right-0"
           >
             <motion.div
               variants={childWrap}
               className="
-        bg-zinc-200
+        bg-zinc-300
         px-5
         border-b-2 border-zinc-600
+        text-zinc-800
         font-semibold text-xl lg:text-2xl
         min-w-full flex items-center justify-between"
             >
-              <h1 className="py-5 text-xl lg:text-2xl">Cart</h1>
+              <h1 className="py-5 text-xl  lg:text-2xl">Cart</h1>
               <h5
                 className="
           cursor-pointer
-          hover:text-zinc-300
+          hover:text-zinc-700
           transition-all ease duration-300     
           shadow-[2px_2px_0_grey]     
-          hover:shadow-[5px_5px_0_grey]
-          hover:bg-zinc-500     
-          border-2 border-zinc-600 px-2 "
+          hover:shadow-[5px_5px_0_black]
+          hover:bg-zinc-300   bg-zinc-400
+          border-2 border-zinc-500 px-2 "
                 onClick={() => closeCart()}
               >
                 X
@@ -133,20 +135,23 @@ const Cart: FC<Props> = ({ isOpen }) => {
         grow items-center justify-start flex flex-col"
             >
               {items.map((item, index) => (
-                <motion.div
-                  variants={childWrap}
-                  key={item.id}
-                  className="w-full md:px-10"
-                >
-                  <CartItem id={item.id} quantity={item.quantity} />
-                </motion.div>
+                <AnimatePresence key={item.id} exitBeforeEnter>
+                  <motion.div
+                    variants={childWrap}
+                    key={item.id}
+                    className="w-full md:px-10"
+                  >
+                    <CartItem id={item.id} quantity={item.quantity} />
+                  </motion.div>
+                </AnimatePresence>
               ))}
             </div>
 
             <motion.h1
               variants={childWrap}
               className="
-        bg-zinc-200
+        
+        bg-zinc-300
         border-t-2 border-zinc-600      
         min-w-full
         flex items-end  justify-end gap-2

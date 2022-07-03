@@ -9,6 +9,7 @@ import { Squeeze as Hamburger, Squeeze } from "hamburger-react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import { useShoppingCart } from "../context/CartContext";
 import { openStdin } from "process";
+import { resolve4 } from "dns";
 
 const Navbar: FC = () => {
   const { openCart, cartQuantity } = useShoppingCart();
@@ -175,18 +176,18 @@ interface Props {
 
 const MobileNavbar: FC<Props> = ({ namePath }) => {
   let parent: Variants = {
-    hidden: { scaleY: 0 },
+    hidden: { x: '-100%' },
     animate: {
-      scaleY: 1,
+      x:'0%',
       transition: {
-        staggerChildren: 0.25,
-        delayChildren:.25,
+        staggerChildren: 0.35,
+        delayChildren:.45,
         ease:'circOut',
         duration:1 
       }
     },
     exit: {
-      scaleY: 0,
+      x:'-100%',
       transition: {
         ease: "circOut",
         duration: 1.2,
@@ -211,10 +212,11 @@ const MobileNavbar: FC<Props> = ({ namePath }) => {
       exit="exit"
       style={{ transformOrigin: "top" }}
       className="
+      bg-black
       lg:hidden
       absolute  top-14 lg:top-20 left-0 z-10
       px-20 py-52 gap-8
-      min-h-screen min-w-full flex flex-col items-start justify-start bg-zinc-900"
+      min-h-screen min-w-full flex flex-col items-start justify-start"
     >
       {navLink.map((item, index) => (
         <Link key={item} href={index === 0 ? item : `/${item}`}>
@@ -226,7 +228,7 @@ const MobileNavbar: FC<Props> = ({ namePath }) => {
             ${
               namePath === navString[index]
                 ? "bg-zinc-400 text-zinc-900 focus:no-underline hover:no-underline"
-                : "no-underline"
+                : "no-underline  hover:bg-zinc-900   focus:bg-zinc-900"
             }
              px-4 lg:h-full
             text-4xl 
@@ -234,7 +236,6 @@ const MobileNavbar: FC<Props> = ({ namePath }) => {
             lg:border-r-2 lg:border-zinc-600
             rounded-lg
             focus:outline-none flex items-start
-            focus:underline hover:underline
              underline-offset-8 decoration-fuchsia-800
             capitalize transition-all ease-out -tracking-wider`}
           >
