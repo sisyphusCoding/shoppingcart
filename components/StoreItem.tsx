@@ -44,7 +44,7 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
     >
       <div
         className={`
-      md:h-fit
+      lg:h-fit
       h-[40vmin] w-full overflow-hidden
 
       ${
@@ -61,7 +61,7 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
           layout="responsive"
           objectFit="cover"
           src={imgUrl}
-          height={150}
+          height={250}
           width={300}
           alt={name}
         />

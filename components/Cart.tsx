@@ -29,7 +29,7 @@ const Cart: FC<Props> = ({ isOpen }) => {
     if (cartQuantity === 0) {
       closeCart();
     }
-  }, [cartQuantity,closeCart]);
+  }, [cartQuantity, closeCart]);
 
   useEffect(() => {
     if (isOpen) {
@@ -69,7 +69,7 @@ const Cart: FC<Props> = ({ isOpen }) => {
   return (
     <AnimatePresence exitBeforeEnter>
       {isOpen ? (
-        <div className="absolute top-0 right-0 min-h-screen min-w-[100vw] flex items-center justify-between">
+        <div className="overflow-hidden absolute top-0 right-0 min-h-screen min-w-[100vw] flex items-center justify-between">
           <motion.div
             onClick={() => closeCart()}
             variants={childWrap}

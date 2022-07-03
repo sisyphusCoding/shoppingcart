@@ -36,7 +36,7 @@ const Navbar: FC = () => {
       <section
         className={`
         overflow-hidden
-        h-14 lg:h-20
+        h-14 lg:h-20 md:h-16
         border-b-2 border-zinc-900
         bg-zinc-100
         items-center justify-between
