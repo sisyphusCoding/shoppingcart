@@ -52,10 +52,20 @@ const Navbar: FC = () => {
         hover:bg-zinc-400
         text-zinc-700
         bg-opacity-20
+        relative
         items-center justify-center
         lg:hidden flex w-20 h-full`}
         >
           <Squeeze toggled={isOpen} toggle={setIsOpen} />
+        </div>
+      
+          <div 
+           className="
+            -tracking-widest
+          text-zinc-500   
+          text-xl
+          absolute left-1/2 transform-cpu -translate-x-1/2">
+          CAFFEINED
         </div>
 
         <nav
@@ -176,18 +186,18 @@ interface Props {
 
 const MobileNavbar: FC<Props> = ({ namePath }) => {
   let parent: Variants = {
-    hidden: { x: '-100%' },
+    hidden: { x: "-100%" },
     animate: {
-      x:'0%',
+      x: "0%",
       transition: {
         staggerChildren: 0.35,
-        delayChildren:.45,
-        ease:'circOut',
-        duration:1 
+        delayChildren: 0.45,
+        ease: "circOut",
+        duration: 1
       }
     },
     exit: {
-      x:'-100%',
+      x: "-100%",
       transition: {
         ease: "circOut",
         duration: 1.2,
@@ -200,7 +210,7 @@ const MobileNavbar: FC<Props> = ({ namePath }) => {
 
   let child: Variants = {
     hidden: { opacity: 0 },
-    animate: { opacity: 1},
+    animate: { opacity: 1 },
     exit: { opacity: 0 }
   };
 
