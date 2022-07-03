@@ -49,12 +49,11 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
 
       ${
         imageLoaded
-          ? " filter blur-0 bg-none brightness-90 hover:brightness-100"
+          ? " filter-none bg-none brightness-90"
           : " blur-xl filter brightness-50"
       }
-        transition-all duration-1000 ease delay-1000
-        min-w-full  border-b-2 border-zinc-800 bg-zinc-900
-       
+        transition-all duration-1000 ease delay-1000 
+        min-w-full  border-b-2 border-zinc-800 
         `}
       >
         <Image
@@ -94,9 +93,10 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
           <AnimatePresence exitBeforeEnter>
             <motion.button
               key={isZero.toString()}
+              
               className={`
+            h-10 md:h-12
             overflow-hidden
-            h-fit
             -z-10
             cursor-pointer
             bg-sky-800
@@ -107,12 +107,10 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
             >
               {quantity < 1 ? (
                 <motion.h3
-                  initial={{y:'-100%'}}
-                  animate={{y:'0%'}}
-                  exit={{y:'120%'}}
-                  
-                  
-                  transition={{duration:.65,ease:'backOut'}}
+                  initial={{ y: "-100%" }}
+                  animate={{ y: "0%" }}
+                  exit={{ y: "120%" }}
+                  transition={{ duration: 0.65, ease: "backOut" }}
                   className="
                 ease duration-300 transition-colors
                 md:p-3 py-2 w-full bg-transparent"
@@ -121,13 +119,12 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
                   add to cart
                 </motion.h3>
               ) : (
-                <div
-                  className="flex w-full justify-between relative">
+                <div className="flex w-full justify-between relative">
                   <motion.h5
-                  initial={{x:'-100%'}}
-                  animate={{x:'0%'}}
-                  exit={{x:'-120%'}}
-                  transition={{duration:.65,ease:'backOut'}}
+                    initial={{ x: "-100%" }}
+                    animate={{ x: "0%" }}
+                    exit={{ x: "-120%" }}
+                    transition={{ duration: 0.65, ease: "backOut" }}
                     className={` 
                   hover:bg-sky-600   
                   transition-colors ease duration-300
@@ -138,19 +135,20 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
                   >
                     -
                   </motion.h5>
-                  <motion.h1 
-                  initial={{y:'-100%'}}
-                  animate={{y:'0%'}}
-                  exit={{y:'120%'}}
-                    transition={{duration:.65,ease:'backOut'}}
-                      className="grow md:p-3 py-3">
+                  <motion.h1
+                    initial={{ y: "-100%" }}
+                    animate={{ y: "0%" }}
+                    exit={{ y: "120%" }}
+                    transition={{ duration: 0.65, ease: "backOut" }}
+                    className="grow md:p-3 py-3"
+                  >
                     <motion.span>{quantity}</motion.span>
                   </motion.h1>
                   <motion.h5
-                 transition={{duration:.65,ease:'backOut'}}
-                  initial={{x:'100%'}}
-                  animate={{x:'0%'}}
-                  exit={{x:'120%'}}
+                    transition={{ duration: 0.65, ease: "backOut" }}
+                    initial={{ x: "100%" }}
+                    animate={{ x: "0%" }}
+                    exit={{ x: "120%" }}
                     className="
                   hover:bg-sky-600   
                   transition-colors ease duration-300
@@ -164,10 +162,10 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
               )}
             </motion.button>
           </AnimatePresence>
-                  <div
-                    onClick={() => remove(id)}
-                    style={{ transformOrigin: "left" }}
-                    className={`
+          <div
+            onClick={() => remove(id)}
+            style={{ transformOrigin: "left" }}
+            className={`
                     cursor-pointer
                   transform-cpu
                   ${isZero ? "scale-x-0" : "scale-x-100"}
@@ -181,9 +179,9 @@ const StoreItem: FC<Props> = ({ id, name, price, imgUrl }) => {
                   w-fit 
                   px-2 bg-red-600 py-2
                   absolute -right-7 -top-0`}
-                  >
-                    <span>X</span>
-                  </div>
+          >
+            <span>X</span>
+          </div>
         </div>
       </div>
     </motion.section>
